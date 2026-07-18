@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LyriConc UI Mockups</title>
+  <style>
+    :root {
+      --ink: #152a35;
+      --nav: #17323b;
+      --nav-muted: #9fb2b6;
+      --paper: #f4f1eb;
+      --surface: #fffefb;
+      --line: #d6d9d4;
+      --muted: #66767a;
+      --teal: #087f75;
+      --teal-soft: #d9eeea;
+      --coral: #dc654c;
+      --coral-soft: #f9e5df;
+      --yellow: #d8a82b;
+      --green: #337a55;
+      --shadow: 0 22px 55px rgba(28, 42, 45, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 48px;
+      background-color: #dfe4df;
+      background-image:
+        linear-gradient(rgba(255,255,255,.36) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.36) 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: var(--ink);
+      font-family: Bahnschrift, "Trebuchet MS", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .screen {
+      width: 1440px;
+      height: 900px;
+      margin: 0 auto 72px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 224px 1fr;
+      grid-template-rows: 72px minmax(0, 1fr) 36px;
+      background: var(--paper);
+      border: 1px solid #c9cfca;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      grid-row: 1 / 4;
+      background: var(--nav);
+      color: white;
+      padding: 25px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 10px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.13);
+      font-family: Georgia, serif;
+      font-size: 23px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: var(--coral);
+      border-radius: 7px;
+      color: white;
+      font-family: Bahnschrift, sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .nav-label {
+      padding: 28px 12px 9px;
+      color: var(--nav-muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-item {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 12px;
+      margin: 3px 0;
+      border-left: 3px solid transparent;
+      color: #d7e1e0;
+      font-size: 14px;
+    }
+
+    .nav-item.active {
+      background: rgba(255,255,255,.09);
+      border-left-color: #58c2b5;
+      color: white;
+    }
+
+    .nav-icon {
+      width: 25px;
+      color: #a9c4c5;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .sidebar-note {
+      margin-top: auto;
+      padding: 14px 12px;
+      border-top: 1px solid rgba(255,255,255,.13);
+      color: var(--nav-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .topbar {
+      grid-column: 2;
+      background: rgba(255,254,251,.94);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px 0 30px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .title-block p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+
+    .db-state { display: flex; align-items: center; gap: 9px; color: var(--green); font-size: 12px; font-weight: 700; }
+    .state-dot { width: 9px; height: 9px; border-radius: 50%; background: #43a06f; box-shadow: 0 0 0 4px #e2f0e8; }
+
+    .main {
+      grid-column: 2;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      padding: 22px 26px;
+    }
+
+    .statusbar {
+      grid-column: 2;
+      background: #eceae4;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 26px;
+      font-size: 11px;
+    }
+
+    .toolbar, .panel, .split-panel {
+      min-width: 0;
+      min-height: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+
+    .toolbar { min-height: 66px; padding: 13px 16px; display: flex; align-items: center; gap: 12px; }
+    .panel { overflow: hidden; }
+    .panel-head { min-height: 48px; padding: 0 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+    .panel-head h2 { margin: 0; font-size: 14px; font-weight: 700; }
+    .panel-body { padding: 16px; }
+
+    .field { min-width: 150px; }
+    .field.grow { flex: 1; }
+    .field.small { min-width: 88px; width: 88px; }
+    label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .input, .select {
+      height: 34px;
+      border: 1px solid #bec7c5;
+      border-radius: 5px;
+      background: white;
+      padding: 0 10px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+    }
+    .select { justify-content: space-between; font-family: Bahnschrift, sans-serif; }
+    .select::after { content: "v"; color: var(--muted); font-size: 10px; }
+
+    .button {
+      height: 34px;
+      padding: 0 14px;
+      border: 1px solid #b9c2c0;
+      border-radius: 5px;
+      background: white;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .button.primary { background: var(--teal); color: white; border-color: var(--teal); }
+    .button.danger { color: #a84232; border-color: #ddb1a7; background: #fff9f7; }
+    .button.icon { width: 34px; padding: 0; font-size: 16px; }
+    .button.disabled { color: #9ca6a4; background: #eef0ed; border-color: #d9ddda; }
+
+    table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 12px; }
+    th { height: 38px; padding: 0 12px; text-align: left; color: var(--muted); background: #f1f2ef; border-bottom: 1px solid var(--line); font-size: 10px; text-transform: uppercase; }
+    td { height: 42px; padding: 0 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border-bottom: 1px solid #e6e8e5; }
+    tr.selected td { background: #e2f1ee; }
+    .number { text-align: right; font-family: Consolas, monospace; }
+    .token { font-family: Consolas, monospace; font-weight: 700; }
+    .badge { display: inline-flex; align-items: center; height: 23px; padding: 0 8px; border-radius: 12px; background: var(--teal-soft); color: #176c65; font-size: 10px; font-weight: 700; }
+    .badge.coral { background: var(--coral-soft); color: #9a4939; }
+    .badge.neutral { background: #eceeeb; color: #596764; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-wide { display: grid; grid-template-columns: 1.45fr .8fr; gap: 16px; }
+    .stack { display: grid; gap: 16px; }
+    .meta-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 13px; }
+    .actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+    .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .metric { padding: 15px; border-left: 4px solid var(--teal); background: #f8faf8; }
+    .metric:nth-child(2) { border-left-color: var(--coral); }
+    .metric:nth-child(3) { border-left-color: var(--yellow); }
+    .metric:nth-child(4) { border-left-color: #526b91; }
+    .metric strong { display: block; margin-top: 5px; font-family: Georgia, serif; font-size: 23px; }
+    .metric span { color: var(--muted); font-size: 10px; text-transform: uppercase; font-weight: 700; }
+
+    .context {
+      min-height: 278px;
+      padding: 20px 22px;
+      background: #faf9f5;
+      font-family: Georgia, serif;
+      font-size: 17px;
+      line-height: 2;
+    }
+    .line-no { display: inline-block; width: 34px; color: #9aa39f; font-family: Consolas, monospace; font-size: 11px; }
+    mark { background: #f2cd68; color: #243335; padding: 2px 4px; border-radius: 3px; }
+
+    .progress { height: 9px; overflow: hidden; border-radius: 5px; background: #e5e7e3; }
+    .progress > span { display: block; height: 100%; width: 100%; background: var(--green); }
+    .verify-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .verify { padding: 12px; border: 1px solid #cddbd2; border-radius: 6px; background: #f4faf6; }
+    .verify strong { display: block; color: var(--green); font-size: 12px; margin-bottom: 4px; }
+    .verify span { color: var(--muted); font-size: 10px; }
+
+    .screen.library .main { display: grid; grid-template-rows: 66px 344px 1fr; gap: 15px; }
+    .screen.search .main { display: grid; grid-template-rows: 84px 1fr; gap: 15px; }
+    .screen.index .main { display: grid; grid-template-rows: 66px 1fr 160px; gap: 15px; }
+    .screen.groups .main { display: grid; grid-template-rows: 306px 1fr; gap: 15px; }
+    .screen.stats .main { display: grid; grid-template-rows: 180px 1fr; gap: 15px; }
+
+    .search-layout { display: grid; grid-template-columns: 330px 1fr; gap: 15px; min-height: 0; }
+    .search-side { display: grid; grid-template-rows: 1fr 1fr; gap: 15px; min-height: 0; }
+    .result-header { padding: 12px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+    .pager { display: flex; align-items: center; gap: 8px; }
+
+    .group-layout { display: grid; grid-template-columns: .7fr .8fr 1.6fr; gap: 15px; }
+    .list-row { height: 43px; padding: 0 13px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e8e4; font-size: 12px; }
+    .list-row.selected { background: var(--teal-soft); color: #145f59; font-weight: 700; }
+
+    .xml-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 15px; }
+    .grid-2 > *, .grid-wide > *, .meta-grid > *, .metric-row > *,
+    .search-layout > *, .group-layout > *, .xml-layout > * { min-width: 0; }
+    .flow { display: flex; align-items: center; gap: 8px; margin: 15px 0; }
+    .flow-step { flex: 1; min-height: 62px; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: #f8f8f5; }
+    .flow-step strong { display: block; margin-bottom: 5px; font-size: 11px; }
+    .flow-step span { color: var(--muted); font-size: 9px; }
+    .flow-arrow { color: var(--coral); font-size: 18px; }
+  </style>
+</head>
+<body>
+
+  <section class="screen library" id="library">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">LC</span> LyriConc</div>
+      <div class="nav-label">Workspace</div>
+      <div class="nav-item active"><span class="nav-icon">+</span>Library / Load</div>
+      <div class="nav-item"><span class="nav-icon">?</span>Search</div>
+      <div class="nav-item"><span class="nav-icon">#</span>Word Index</div>
+      <div class="nav-item"><span class="nav-icon">::</span>Groups & Phrases</div>
+      <div class="nav-item"><span class="nav-icon">%</span>Statistics & XML</div>
+      <div class="sidebar-note">Corpus<br><strong style="color:white">12 songs</strong><br>Last loaded 14:32</div>
+    </aside>
+    <header class="topbar">
+      <div class="title-block"><h1>Library / Load</h1><p>Manage corpus files and song metadata</p></div>
+      <div class="db-state"><span class="state-dot"></span>DATABASE READY</div>
+    </header>
+    <main class="main">
+      <div class="toolbar">
+        <div class="field grow"><label>Corpus folder</label><div class="input">C:\Projects\LyriConc\data\corpus</div></div>
+        <div class="button">Browse...</div><div class="button primary">Load folder</div>
+      </div>
+      <section class="panel">
+        <div class="panel-head"><h2>Loaded songs</h2><span class="badge">12 documents</span></div>
+        <table>
+          <thead><tr><th style="width:48px">ID</th><th>Title</th><th>File</th><th>Language</th><th>Genre</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="selected"><td>01</td><td><strong>Across the Harbor</strong></td><td class="token">across_the_harbor.txt</td><td>English</td><td>Folk</td><td><span class="badge">Indexed</span></td></tr>
+            <tr><td>02</td><td>After the Rain</td><td class="token">after_the_rain.txt</td><td>English</td><td>Pop</td><td><span class="badge">Indexed</span></td></tr>
+            <tr><td>03</td><td>Paper Moons</td><td class="token">paper_moons.txt</td><td>English</td><td>Indie</td><td><span class="badge">Indexed</span></td></tr>
+            <tr><td>04</td><td>Quiet Avenue</td><td class="token">quiet_avenue.txt</td><td>English</td><td>Jazz</td><td><span class="badge neutral">Updated</span></td></tr>
+            <tr><td>05</td><td>Thread of Gold</td><td class="token">thread_of_gold.txt</td><td>English</td><td>Folk</td><td><span class="badge">Indexed</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h2>Selected-song metadata</h2><span style="font-size:11px;color:var(--muted)">across_the_harbor.txt</span></div>
+        <div class="panel-body">
+          <div class="meta-grid">
+            <div class="field"><label>Title</label><div class="input">Across the Harbor</div></div>
+            <div class="field"><label>Album</label><div class="input">Open Water</div></div>
+            <div class="field"><label>Release year</label><div class="input">2024</div></div>
+            <div class="field"><label>Contributors</label><div class="input">Mara Lane - performer, lyricist</div></div>
+            <div class="field"><label>Genre</label><div class="select">Folk</div></div>
+            <div class="field"><label>Language</label><div class="select">English</div></div>
+          </div>
+          <div class="actions"><div class="button danger">Delete / reload</div><div class="button primary">Save metadata</div></div>
+        </div>
+      </section>
+    </main>
+    <footer class="statusbar"><span>12 documents | 2,481 distinct words | 14,203 occurrences</span><span>UTF-8 corpus</span></footer>
+  </section>
+
+  <section class="screen search" id="search">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">LC</span> LyriConc</div><div class="nav-label">Workspace</div>
+      <div class="nav-item"><span class="nav-icon">+</span>Library / Load</div><div class="nav-item active"><span class="nav-icon">?</span>Search</div><div class="nav-item"><span class="nav-icon">#</span>Word Index</div><div class="nav-item"><span class="nav-icon">::</span>Groups & Phrases</div><div class="nav-item"><span class="nav-icon">%</span>Statistics & XML</div>
+      <div class="sidebar-note">Active query<br><strong style="color:white">love</strong><br>14 occurrences</div>
+    </aside>
+    <header class="topbar"><div class="title-block"><h1>Search + Concordance</h1><p>Retrieve songs, words, and surrounding context</p></div><div class="db-state"><span class="state-dot"></span>DATABASE READY</div></header>
+    <main class="main">
+      <div class="toolbar">
+        <div class="field grow"><label>Title or artist</label><div class="input">Any title or contributor</div></div>
+        <div class="field"><label>Genre</label><div class="select">All genres</div></div>
+        <div class="field"><label>Lyric token</label><div class="input"><strong>love</strong></div></div>
+        <div class="button primary">Search</div><div class="button icon">x</div>
+      </div>
+      <div class="search-layout">
+        <div class="search-side">
+          <section class="panel"><div class="panel-head"><h2>Matching documents</h2><span class="badge">4 songs</span></div><div class="list-row selected"><span>Across the Harbor</span><strong>6</strong></div><div class="list-row"><span>After the Rain</span><strong>4</strong></div><div class="list-row"><span>Paper Moons</span><strong>3</strong></div><div class="list-row"><span>Thread of Gold</span><strong>1</strong></div></section>
+          <section class="panel"><div class="panel-head"><h2>Word frequency</h2><span style="font-size:10px;color:var(--muted)">THIS SONG</span></div><table><thead><tr><th>Token</th><th class="number">Count</th></tr></thead><tbody><tr class="selected"><td class="token">love</td><td class="number">6</td></tr><tr><td class="token">water</td><td class="number">5</td></tr><tr><td class="token">home</td><td class="number">4</td></tr><tr><td class="token">harbor</td><td class="number">4</td></tr></tbody></table></section>
+        </div>
+        <section class="panel">
+          <div class="result-header"><div><strong style="font-size:14px">Occurrence context</strong><div style="color:var(--muted);font-size:10px;margin-top:4px">Across the Harbor | stanza 2, line 3, offset 4</div></div><div class="pager"><div class="button icon">&lt;</div><span style="font-size:11px">2 of 6</span><div class="button icon">&gt;</div></div></div>
+          <div class="context"><div><span class="line-no">06</span>The lamps along the water lean</div><div><span class="line-no">07</span>And every window answers low</div><div><span class="line-no">08</span>I carried all my <mark>love</mark> back home</div><div><span class="line-no">09</span>Across the harbor's silver glow</div><div><span class="line-no">10</span>Where quiet boats remember names</div></div>
+          <div style="padding:15px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center"><span style="color:var(--muted);font-size:11px">Source read from data/corpus/across_the_harbor.txt</span><div style="display:flex;gap:8px"><div class="button">Mark phrase</div><div class="button primary">Find other occurrences</div></div></div>
+        </section>
+      </div>
+    </main>
+    <footer class="statusbar"><span>Search completed in 18 ms</span><span>Normalized token: love</span></footer>
+  </section>
+
+  <section class="screen index" id="index">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">LC</span> LyriConc</div><div class="nav-label">Workspace</div>
+      <div class="nav-item"><span class="nav-icon">+</span>Library / Load</div><div class="nav-item"><span class="nav-icon">?</span>Search</div><div class="nav-item active"><span class="nav-icon">#</span>Word Index</div><div class="nav-item"><span class="nav-icon">::</span>Groups & Phrases</div><div class="nav-item"><span class="nav-icon">%</span>Statistics & XML</div>
+      <div class="sidebar-note">Position systems<br><strong style="color:white">Structural + absolute</strong></div>
+    </aside>
+    <header class="topbar"><div class="title-block"><h1>Word Index + Position Lookup</h1><p>Inspect both coordinate systems or resolve a known position</p></div><div class="db-state"><span class="state-dot"></span>DATABASE READY</div></header>
+    <main class="main">
+      <div class="toolbar"><div class="field grow"><label>Document</label><div class="select">Across the Harbor</div></div><div class="field grow"><label>Token filter</label><div class="input">Type to filter the index...</div></div><div class="button primary">Apply</div><div class="button">Export view</div></div>
+      <section class="panel"><div class="panel-head"><h2>Concordance index</h2><div style="display:flex;gap:7px"><span class="badge">Structural position</span><span class="badge coral">Absolute position</span></div></div><table><thead><tr><th>Word</th><th>Song</th><th class="number">Stanza</th><th class="number">Line</th><th class="number">Offset</th><th class="number">Global line</th><th class="number">Document sequence</th></tr></thead><tbody><tr><td class="token">across</td><td>Across the Harbor</td><td class="number">1</td><td class="number">1</td><td class="number">1</td><td class="number">1</td><td class="number">0</td></tr><tr><td class="token">answers</td><td>Across the Harbor</td><td class="number">2</td><td class="number">2</td><td class="number">4</td><td class="number">7</td><td class="number">36</td></tr><tr class="selected"><td class="token">love</td><td>Across the Harbor</td><td class="number">2</td><td class="number">3</td><td class="number">5</td><td class="number">8</td><td class="number">43</td></tr><tr><td class="token">silver</td><td>Across the Harbor</td><td class="number">2</td><td class="number">4</td><td class="number">5</td><td class="number">9</td><td class="number">49</td></tr><tr><td class="token">water</td><td>Across the Harbor</td><td class="number">2</td><td class="number">1</td><td class="number">5</td><td class="number">6</td><td class="number">30</td></tr><tr><td class="token">window</td><td>Across the Harbor</td><td class="number">2</td><td class="number">2</td><td class="number">3</td><td class="number">7</td><td class="number">35</td></tr></tbody></table></section>
+      <section class="panel"><div class="panel-head"><h2>Locate word by structural position</h2><span style="font-size:10px;color:var(--muted)">DISPLAYED OFFSETS ARE 1-BASED</span></div><div class="panel-body" style="display:flex;gap:12px;align-items:end"><div class="field grow"><label>Document</label><div class="select">Across the Harbor</div></div><div class="field small"><label>Stanza</label><div class="input">2</div></div><div class="field small"><label>Line</label><div class="input">3</div></div><div class="field small"><label>Offset</label><div class="input">5</div></div><div class="button primary">Locate</div><div style="margin-left:auto;padding:9px 14px;border-left:3px solid var(--coral);background:var(--coral-soft);font-size:12px"><strong class="token">love</strong><span style="color:var(--muted);margin-left:12px">global line 8 | sequence 43</span></div></div></section>
+    </main>
+    <footer class="statusbar"><span>2,481 distinct words | Sorted A-Z</span><span>Offsets stored 0-based, displayed 1-based</span></footer>
+  </section>
+
+  <section class="screen groups" id="groups">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">LC</span> LyriConc</div><div class="nav-label">Workspace</div>
+      <div class="nav-item"><span class="nav-icon">+</span>Library / Load</div><div class="nav-item"><span class="nav-icon">?</span>Search</div><div class="nav-item"><span class="nav-icon">#</span>Word Index</div><div class="nav-item active"><span class="nav-icon">::</span>Groups & Phrases</div><div class="nav-item"><span class="nav-icon">%</span>Statistics & XML</div>
+      <div class="sidebar-note">Selected group<br><strong style="color:white">Emotion words</strong><br>8 members</div>
+    </aside>
+    <header class="topbar"><div class="title-block"><h1>Groups, Phrases & Export</h1><p>Curate vocabulary sets and search ordered expressions</p></div><div class="db-state"><span class="state-dot"></span>DATABASE READY</div></header>
+    <main class="main">
+      <div class="group-layout">
+        <section class="panel"><div class="panel-head"><h2>Word groups</h2><div class="button icon">+</div></div><div class="list-row selected"><span>Emotion words</span><span class="badge">8</span></div><div class="list-row"><span>Place names</span><span class="badge neutral">5</span></div><div class="list-row"><span>Weather</span><span class="badge neutral">11</span></div><div class="list-row"><span>Motion verbs</span><span class="badge neutral">17</span></div><div style="padding:12px;display:flex;gap:7px"><div class="button">Rename</div><div class="button danger">Delete</div></div></section>
+        <section class="panel"><div class="panel-head"><h2>Group members</h2><span class="badge">8 words</span></div><div style="padding:12px;border-bottom:1px solid var(--line);display:flex;gap:7px"><div class="input" style="flex:1">hope</div><div class="button primary">Add</div></div><div class="list-row"><span class="token">joy</span><span>x</span></div><div class="list-row selected"><span class="token">love</span><span>x</span></div><div class="list-row"><span class="token">sorrow</span><span>x</span></div><div class="list-row"><span class="token">wonder</span><span>x</span></div></section>
+        <section class="panel"><div class="panel-head"><h2>Group index</h2><div style="display:flex;gap:7px"><div class="button">TXT</div><div class="button primary">Export CSV</div></div></div><table><thead><tr><th>Word</th><th>Song</th><th class="number">Stanza</th><th class="number">Line</th><th class="number">Offset</th></tr></thead><tbody><tr><td class="token">joy</td><td>After the Rain</td><td class="number">3</td><td class="number">2</td><td class="number">1</td></tr><tr class="selected"><td class="token">love</td><td>Across the Harbor</td><td class="number">2</td><td class="number">3</td><td class="number">5</td></tr><tr><td class="token">love</td><td>Paper Moons</td><td class="number">1</td><td class="number">4</td><td class="number">2</td></tr><tr><td class="token">sorrow</td><td>Thread of Gold</td><td class="number">4</td><td class="number">1</td><td class="number">6</td></tr></tbody></table></section>
+      </div>
+      <section class="panel"><div class="panel-head"><h2>Stored linguistic expressions</h2><span class="badge coral">Ordered token sequences</span></div><div class="panel-body"><div style="display:grid;grid-template-columns:1fr 2fr auto;gap:12px;align-items:end"><div class="field"><label>Phrase name</label><div class="input">Carry it home</div></div><div class="field"><label>Normalized tokens</label><div class="input">carry | it | home</div></div><div style="display:flex;gap:8px"><div class="button">Save phrase</div><div class="button primary">Search occurrences</div></div></div><div style="margin-top:18px;border-top:1px solid var(--line)"><table><thead><tr><th>Phrase</th><th>Song</th><th class="number">Start sequence</th><th>Line span</th><th>Status</th></tr></thead><tbody><tr class="selected"><td><strong>Carry it home</strong></td><td>Across the Harbor</td><td class="number">41</td><td>8-8</td><td><span class="badge">Exact match</span></td></tr><tr><td><strong>Over and over</strong></td><td>After the Rain</td><td class="number">92</td><td>14-15</td><td><span class="badge coral">Cross-line</span></td></tr></tbody></table></div></div></section>
+    </main>
+    <footer class="statusbar"><span>Group index ready for export</span><span>Phrase matching uses continuous document sequence</span></footer>
+  </section>
+
+  <section class="screen stats" id="stats">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">LC</span> LyriConc</div><div class="nav-label">Workspace</div>
+      <div class="nav-item"><span class="nav-icon">+</span>Library / Load</div><div class="nav-item"><span class="nav-icon">?</span>Search</div><div class="nav-item"><span class="nav-icon">#</span>Word Index</div><div class="nav-item"><span class="nav-icon">::</span>Groups & Phrases</div><div class="nav-item active"><span class="nav-icon">%</span>Statistics & XML</div>
+      <div class="sidebar-note">Last backup<br><strong style="color:white">Today, 14:46</strong><br>Verification passed</div>
+    </aside>
+    <header class="topbar"><div class="title-block"><h1>Statistics + XML Backup</h1><p>Measure the corpus and verify a complete data round trip</p></div><div class="db-state"><span class="state-dot"></span>DATABASE READY</div></header>
+    <main class="main">
+      <section class="panel"><div class="panel-head"><h2>Corpus statistics</h2><div style="display:flex;gap:8px"><div class="select" style="width:180px">All documents</div><div class="button">Refresh</div></div></div><div class="panel-body"><div class="metric-row"><div class="metric"><span>Documents</span><strong>12</strong></div><div class="metric"><span>Stanzas</span><strong>64</strong></div><div class="metric"><span>Lyric lines</span><strong>418</strong></div><div class="metric"><span>Occurrences</span><strong>14,203</strong></div></div></div></section>
+      <div class="xml-layout">
+        <section class="panel"><div class="panel-head"><h2>XML backup and restore</h2><span class="badge coral">Additional topic</span></div><div class="panel-body"><div class="field"><label>Backup file</label><div style="display:flex;gap:8px"><div class="input" style="flex:1">C:\Projects\LyriConc\backups\lyriconc_2026-07-19.xml</div><div class="button">Browse...</div></div></div><div class="flow"><div class="flow-step"><strong>1. Export</strong><span>Write all 12 tables and record baseline counts</span></div><div class="flow-arrow">&gt;</div><div class="flow-step"><strong>2. Recreate</strong><span>Build an empty database from schema.sql</span></div><div class="flow-arrow">&gt;</div><div class="flow-step"><strong>3. Restore</strong><span>Import parent tables before child tables</span></div><div class="flow-arrow">&gt;</div><div class="flow-step"><strong>4. Verify</strong><span>Compare counts, foreign keys, and sample queries</span></div></div><div style="display:flex;gap:8px"><div class="button">Export XML</div><div class="button danger">Reset + restore</div><div class="button primary">Verify database</div></div><div style="margin-top:20px"><label>Last operation</label><div class="progress"><span></span></div><div style="display:flex;justify-content:space-between;margin-top:7px;color:var(--muted);font-size:10px"><span>Restore and verification complete</span><span>100%</span></div></div></div></section>
+        <section class="panel"><div class="panel-head"><h2>Verification report</h2><span class="badge">Passed</span></div><div class="panel-body"><div class="verify-list"><div class="verify"><strong>12 / 12</strong><span>tables checked</span></div><div class="verify"><strong>Match</strong><span>row counts</span></div><div class="verify"><strong>0 issues</strong><span>foreign keys</span></div></div><table style="margin-top:18px"><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td>Word search after restore</td><td><span class="badge">Pass</span></td></tr><tr><td>Context file resolution</td><td><span class="badge">Pass</span></td></tr><tr><td>Concordance positions</td><td><span class="badge">Pass</span></td></tr><tr><td>Phrase sequence integrity</td><td><span class="badge">Pass</span></td></tr></tbody></table><div class="actions"><div class="button">Save report</div></div></div></section>
+      </div>
+    </main>
+    <footer class="statusbar"><span>Backup schema version 1 | UTF-8 XML</span><span>Last verification: 19 July 2026, 14:47</span></footer>
+  </section>
+
+</body>
+</html>
