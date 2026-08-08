@@ -20,7 +20,30 @@ The downloadable source bundle is [LyriConc-Stage-A.zip](LyriConc-Stage-A.zip).
 
 ## Status
 
-The planning artifacts and SQL examples are complete and validated. The two
-student names/IDs and submission date remain placeholders in the approval
-packet. Implementation should begin only after the coordinator approves the
-plan, SQLite use, and XML additional topic.
+Stage A planning is complete and Stage B implementation is in place:
+
+- SQLite schema, loader, tokenizer, parser, service layer, XML backup/restore.
+- PySide6 desktop app with 5 screens covering all 11 workbook functions plus
+  the XML additional topic.
+- `pytest` suite (tokenizer, parser, services, XML round-trip, UI smoke test).
+
+The two student names/IDs and submission date remain placeholders in the
+approval packet until the coordinator approves the plan, SQLite use, and XML
+additional topic.
+
+## Running
+
+```powershell
+# One-time setup
+python -m venv .venv
+.\.venv\Scripts\pip install -r requirements.txt
+
+# Launch the desktop app
+.\.venv\Scripts\python -m lyriconc
+
+# Run the test suite
+$env:QT_QPA_PLATFORM='offscreen'; .\.venv\Scripts\python -m pytest
+```
+
+On first launch use the *Library / Load* tab to point at `data/corpus/` (or any
+folder of `.txt` lyric files) and click **Load folder**.

@@ -1,0 +1,20 @@
+[project]
+name = "lyriconc"
+version = "1.0.0"
+description = "LyriConc - song lyrics concordance and text-retrieval system (course 20563)"
+requires-python = ">=3.11"
+dependencies = ["PySide6>=6.7"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lyriconc = ["sql/*.sql"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
