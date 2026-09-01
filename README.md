@@ -33,10 +33,19 @@ additional topic.
 
 ## Running
 
+### Windows: double-click launcher
+
+Double-click **Run LyriConc.cmd** in the project folder. On first use, the
+launcher creates `.venv` and installs LyriConc and its required packages. Later
+launches open the application directly. Python 3.11 or newer must already be
+installed on the computer.
+
+### PowerShell
+
 ```powershell
 # One-time setup
 python -m venv .venv
-.\.venv\Scripts\pip install -r requirements.txt
+.\.venv\Scripts\python -m pip install -e .
 
 # Launch the desktop app
 .\.venv\Scripts\python -m lyriconc

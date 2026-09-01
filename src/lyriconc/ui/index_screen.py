@@ -120,6 +120,8 @@ class IndexScreen(QWidget):
         document_id = self.doc_combo.currentData()
         group_id = self.group_combo.currentData()
         rows = self.service.get_word_index(document_id, group_id)
+        for row in rows:
+            row["word_seq_in_doc"] += 1
         fill_table(self.table, rows[:1000], INDEX_COLUMNS)
 
     def _locate_word(self) -> None:

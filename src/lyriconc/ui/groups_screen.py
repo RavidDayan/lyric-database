@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
     QComboBox,
     QFileDialog,
@@ -37,6 +37,8 @@ PHRASE_HIT_HEADERS = ["Song", "First line", "Last line", "Length"]
 
 class GroupsScreen(QWidget):
     """Manage word groups, phrases and the group-index export."""
+
+    groups_changed = Signal()
 
     def __init__(self, service: LyriConcService) -> None:
         super().__init__()
@@ -165,6 +167,7 @@ class GroupsScreen(QWidget):
             error(self, "New group", str(exc))
             return
         self.refresh()
+        self.groups_changed.emit()
 
     def _delete_group(self) -> None:
         group_id = self._current_group_id()
@@ -174,6 +177,7 @@ class GroupsScreen(QWidget):
             return
         self.service.delete_group(group_id)
         self.refresh()
+        self.groups_changed.emit()
 
     def _add_word(self) -> None:
         group_id = self._current_group_id()
@@ -193,6 +197,8 @@ class GroupsScreen(QWidget):
         self.word_input.clear()
         self._load_group_words()
         self.refresh_groups_only()
+        if added:
+            self.groups_changed.emit()
 
     def refresh_groups_only(self) -> None:
         rows = self.service.list_groups()
@@ -218,6 +224,7 @@ class GroupsScreen(QWidget):
         self.service.remove_word_from_group(group_id, token_item.text())
         self._load_group_words()
         self.refresh_groups_only()
+        self.groups_changed.emit()
 
     def _export_group(self, fmt: str) -> None:
         group_id = self._current_group_id()

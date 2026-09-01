@@ -48,12 +48,17 @@ class MainWindow(QMainWindow):
         self.library.corpus_changed.connect(self._refresh_all)
         self.stats.corpus_restored.connect(self._refresh_all)
         self.search.groups_changed.connect(self._refresh_all)
+        self.groups.groups_changed.connect(self._refresh_group_views)
 
     def _refresh_all(self) -> None:
         self.search.refresh()
         self.index.refresh()
         self.groups.refresh()
         self.stats.refresh()
+
+    def _refresh_group_views(self) -> None:
+        self.search._refresh_group_combo()
+        self.index.refresh()
 
     def closeEvent(self, event) -> None:  # noqa: N802 (Qt signature)
         self.service.close()
