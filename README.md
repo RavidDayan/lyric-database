@@ -56,3 +56,29 @@ $env:QT_QPA_PLATFORM='offscreen'; .\.venv\Scripts\python -m pytest
 
 On first launch use the *Library / Load* tab to point at `data/corpus/` (or any
 folder of `.txt` lyric files) and click **Load folder**.
+
+## Web App
+
+The simple, read-only Streamlit site lets visitors browse the bundled corpus,
+search for words and their context, and view statistics.
+
+### Run locally
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.txt
+.\.venv\Scripts\streamlit run streamlit_app.py
+```
+
+Open `http://localhost:8501` in a browser.
+
+### Deploy for free
+
+1. Push the project to GitHub.
+2. Sign in at `https://share.streamlit.io` with GitHub.
+3. Create an app using this repository and choose `streamlit_app.py` as the
+  entry point.
+4. Click **Deploy** and share the generated `streamlit.app` URL.
+
+Streamlit Community Cloud installs `requirements.txt` and loads the bundled
+files in `data/corpus/` automatically. No secrets or database setup are needed.
